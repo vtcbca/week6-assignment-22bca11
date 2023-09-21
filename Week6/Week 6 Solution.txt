@@ -1,0 +1,85 @@
+1. Create result table
+
+import sqlite3 as sq
+con = sq.connect('student11.db')
+cur = con.cursor()
+q = """create table result(student_id int primary key,
+          student_name varchar,
+          Subject1 int,
+          Subject2 int,
+          Subject3 int,
+          Subject4 int,
+          Subject5 Varchar)"""
+cur.execute(q)
+con.commit()
+
+
+2. Insert Records in Result table.
+
+import sqlite3 as sq
+con = sq.connect('student11.db')
+cur = con.cursor()
+q = """Insert into result values(1,'Om',39,45,30,34,31),
+                                            (2,'Sai',40,41,39,43,44),
+                                            (3,'Ram',31,29,28,34,36),
+                                            (4,'Shree',49,50,41,45,49),
+                                            (5,'Krishna',50,49,50,45,48),
+                                            (6,'Hanuman',45,43,29,37,33),
+                                            (7,'Hare',26,28,29,25,30),
+                                            (8,'Radha',29,39,35,36,37),
+                                            (9,'Shiva',39,38,35,30,34),
+                                            (10,'Ganesha',29,28,29,30,31)"""
+cur.execute(q)
+con.commit()
+
+
+3.dump table in csv file.
+
+.header on
+.mode csv
+.output result.csv
+select * from result
+.quit
+
+
+4. Read result.csv file and Print Total Marks and Grade of each student.Also Append Total Marks and Grade column into result.csv file.
+
+import csv 
+with open('result.csv','r') as r:
+    Read=csv.reader(r)
+    li=[]
+    header.append["Total_Marks","Grade"]
+    li.append(header)
+    for i in Read:
+        student_id,student_name,*Subject=i
+        total=sum(int,Subject)
+        if Total>=450:
+            Grade='A+'
+        elif Total>=400:
+            Grade='A'
+        elif Total>=300:
+            Grade='B'
+        elif Total>=250:
+            Grade='C'
+        elif Total>=150:
+            Grade='D'
+        elif Total>=100:
+            Grade='E'
+        else:
+            Grade="Need Improvement"
+        i.append([Total,Grade])
+        li.append(i)
+
+
+5. List out Top 3 Student id and name with its percentage.
+
+from csv import reader
+with open("result.csv","r") as r:
+    read=reader(r)
+    P=[]
+    for i in read:
+        Percentages= Total_Marks/5
+        P.append(Percentages)
+print("student_id","student_name","Percentage")
+for i in range(3):
+    print("Id,Name"(i[0],i[1],i[2]))
